@@ -1,0 +1,40 @@
+[project]
+name = "asuno-salon-birmingham"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "saqibmurtaza", email = "saqibmurtazakhan@gmai.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "beautifulsoup4>=4.13.5",
+    "chainlit>=2.5.5",
+    "google-api-python-client>=2.167.0",
+    "google-auth-httplib2>=0.2.0",
+    "google-auth-oauthlib>=1.2.1",
+    "openai-agents>=0.0.12",
+    "supabase>=2.18.1",
+    "uvicorn[standard]",
+    "httpx",
+    "requests",
+    "python-dotenv",
+    "pydantic",
+    "pydantic-settings",
+    "sqlmodel",
+    "asyncpg", # PostgreSQL adapter for asynchronous DB connections (recommended for FastAPI)
+    "rich", # For better CLI logs (optional, but nice for development)
+    "orjson", # Faster JSON parsing in FastAPI (optional, but improves performance)
+    "fastapi>=0.115.14",
+    "python-jose>=3.5.0",
+    "pytz>=2025.2",
+    "sqlalchemy>=2.0.42",
+    "setuptools>=80.9.0",
+]
+
+[project.scripts]
+asuno-salon-birmingham = "asuno_salon_birmingham:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
