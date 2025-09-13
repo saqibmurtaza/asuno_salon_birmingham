@@ -1,4 +1,4 @@
-from agents import Runner
+from agents import Runner, SQLiteSession
 from asuno_salon_birmingham.agents.config_agents import config
 from asuno_salon_birmingham.agents.marketing_agent import aria
 from asuno_salon_birmingham.chainlit_frontend.booking_flow import BookingFlow
@@ -23,6 +23,9 @@ API_BASE = "http://localhost:8000"  # backend running locally or deployed
 
 @cl.on_chat_start
 async def on_chat_start():
+    # Each user session gets a unique session ID for the agent's memory
+    session_id = cl.user_session.get("id")
+    cl.user_session.set("agent_session", SQLiteSession(session_id))
     await cl.Message(
         content=(
             "💇‍♀️ **Welcome to Asuna Salon!** ✨\n\n"
@@ -51,6 +54,7 @@ async def send_followup_buttons(content: str):
 
 @cl.on_message
 async def on_message(message: cl.Message):
+    agent_session = cl.user_session.get("agent_session")
     user_input = message.content.strip()
     lower_input = user_input.lower()
 
@@ -80,6 +84,7 @@ async def on_message(message: cl.Message):
     result = await Runner.run(
         aria,
         user_input,
+        session=agent_session,
         run_config=config,
     )
     await cl.Message(content=result.final_output).send()
