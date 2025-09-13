@@ -31,7 +31,7 @@ async def on_chat_start():
             "💇‍♀️ **Welcome to Asuna Salon!** ✨\n\n"
             "Easily explore our beauty & styling services using the quick buttons below, "
             "or just tell me what you’re looking for.\n\n"
-            "💡 Tip: Type **Hi** to connect with our Marketing Manager."
+            "💡 Tip: Type **Hi** to connect with our our friendly Assistant **Aria**."
         ),
         actions=[
             cl.Action(name="explore", label="✨ Explore Services", payload={"intent": "explore"}),
@@ -69,9 +69,8 @@ async def on_message(message: cl.Message):
     # Special case: user greets Aria
     if lower_input in ["hi", "hello", "hey"]:
         intro = (
-            "👋 Hi, I’m **Aria**, your virtual Marketing Manager here at Asuna Salon.\n\n"
-            "I can help you explore our services, recommend treatments, "
-            "or answer any questions you may have about the salon.\n\n"
+            "👋 Hi there! I'm Aria, and I'm here to help you with your marketing questions.\n\n"
+            "What's on your mind today?\n\n"
             "✨ To browse services, please use the **Explore Services** button below.\n"
             "📅 To schedule a visit, click the **Book Appointment** button.\n\n"
             "Or simply ask me a question, and I’ll be glad to guide you!"
@@ -94,7 +93,7 @@ async def on_message(message: cl.Message):
 
 def with_aria_footer(content: str) -> str:
     """Append the Aria reminder to any chatbot message."""
-    return content + "\n\n💡 You can also type *Hi* anytime to connect with **Aria, our Marketing Manager**."
+    return content + "\n\n💡 Just type *Hi* anytime to say hello to **Aria, our friendly Assistant**!"
 
 @cl.action_callback("explore")
 async def explore_action(action: cl.Action):
